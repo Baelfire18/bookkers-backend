@@ -55,7 +55,9 @@ router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
 })
 
 router.get('api.books.review', '/:id/reviews', loadBook, async (ctx) =>{
-    
+  const { book } = ctx.state;
+  const reviews = await book.getReviews();
+  
 })
 
 module.exports = router;
