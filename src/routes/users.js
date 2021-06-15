@@ -46,7 +46,8 @@ router.get('api.users', '/:id', async (ctx) => {
 router.post('api.users.create', '/', async (ctx) => {
   try {
     const user = ctx.orm.user.build(ctx.request.body);
-    await user.save({ fields: ['firstName', 'lastName', 'email', 'password'] });
+    user.admin = 0;
+    await user.save({ fields: ['firstName', 'lastName', 'email', 'password', 'admin'] });
     ctx.status = 201;
     ctx.body = UserSerializer.serialize(user);
   } catch (ValidationError) {
