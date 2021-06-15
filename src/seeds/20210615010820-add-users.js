@@ -11,6 +11,7 @@ module.exports = {
       lastName: 'Castro',
       email: 'jacastro18@uc.cl',
       password: '123456',
+      admin: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -18,8 +19,9 @@ module.exports = {
     usersArray.push({
       firstName: 'José',
       lastName: 'Madriaza',
-      email: 'cacu@uc.cl',
+      email: 'jm.madriaza@uc.cl',
       password: '123456',
+      admin: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -27,8 +29,9 @@ module.exports = {
     usersArray.push({
       firstName: 'Bastian',
       lastName: 'Hilcker',
-      email: 'afrocircus@uc.cl',
+      email: 'bhilcker@uc.cl',
       password: '123456',
+      admin: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -38,6 +41,7 @@ module.exports = {
       lastName: 'Ortuzar',
       email: 'hjortuzar@uc.cl',
       password: '123456',
+      admin: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     });

@@ -7,56 +7,56 @@ module.exports = {
     const booksArray = [];
 
     booksArray.push({
-      title: 'Percy Jackson: Thieft of thunder',
+      title: 'Percy Jackson: The Lightning Thief',
       isbn: '9786124497001',
       author: 'Rick Riordan',
       genre: 'Fantasy',
       userId: 1,
-      description: 'Movie about a guy and storms',
+      description: 'Twelve-year-old Percy Jackson is on the most dangerous quest of his life. With the help of a satyr and a daughter of Athena, Percy must journey across the United States to catch a thief who has stolen the original weapon of mass destruction — Zeus’ master bolt. Along the way, he must face a host of mythological enemies determined to stop him. Most of all, he must come to terms with a father he has never known, and an Oracle that has warned him of betrayal by a friend.',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     booksArray.push({
-      title: 'Percy Jackson: Sea of monsters',
+      title: 'Percy Jackson: The Sea of Monsters',
       isbn: '9786124497002',
       author: 'Rick Riordan',
       genre: 'Fantasy',
       userId: 1,
-      description: 'Movie about a guy and sea and monsters',
+      description: 'When Thalia’s tree is mysteriously poisoned, the magical borders of Camp Half-Blood begin to fail. Now Percy and his friends have just days to find the only magic item powerful to save the camp before it is overrun by monsters. The catch: they must sail into the Sea of Monsters to find it. Along the way, Percy must stage a daring rescue operation to save his old friend Grover, and he learns a terrible secret about his own family, which makes him question whether being the son of Poseidon is an honor or a curse.',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     booksArray.push({
-      title: 'Percy Jackson: Curso of the titan',
+      title: 'Percy Jackson: The Titan’s Curse',
       isbn: '9786124497003',
       author: 'Rick Riordan',
       genre: 'Fantasy',
       userId: 1,
-      description: 'Movie about a guy and titans',
+      description: 'When Percy Jackson gets an urgent distress call from his friend Grover, he immediately prepares for battle. He knows he will need his powerful demigod allies at his side, his trusty bronze sword Riptide, and… a ride from his mom.',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     booksArray.push({
-      title: 'Percy Jackson: Labryinth of the Minotaur',
+      title: 'Percy Jackson: The Battle of the Labyrinth',
       isbn: '9786124497004',
       author: 'Rick Riordan',
       genre: 'Fantasy',
       userId: 1,
-      description: 'Movie about a guy and a labryinth',
+      description: 'Percy Jackson isn’t expecting freshman orientation to be any fun, but when a mysterious mortal acquaintance appears, pursued by demon cheerleaders, things quickly go from bad to worse.',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     booksArray.push({
-      title: 'Percy Jackson: Last hero of Olympus',
+      title: 'Percy Jackson: The Last Olympian',
       isbn: '9786124497005',
       author: 'Rick Riordan',
       genre: 'Fantasy',
       userId: 1,
-      description: 'Movie about a guy and the olympus',
+      description: 'All year the half-bloods have been preparing for battle against the Titans, knowing the odds of victory are grim. Kronos’s army is stronger than ever, and with every god and half-blood he recruits, the evil Titan’s power only grows.',
       createdAt: new Date(),
       updatedAt: new Date(),
     });

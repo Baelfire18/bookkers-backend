@@ -7,7 +7,7 @@ module.exports = {
     const reviewsArray = [];
 
     reviewsArray.push({
-      content: 'Pa que me deci spoilers',
+      content: 'Cool book! Luke is the bad guy',
       userId: 2,
       bookId: 1,
       score: 5,
@@ -16,7 +16,7 @@ module.exports = {
     });
 
     reviewsArray.push({
-      content: 'Pa perkines, sabido es mejor el 3',
+      content: 'Lame book, it\'s better the third one',
       userId: 3,
       bookId: 1,
       score: 1,
@@ -25,7 +25,7 @@ module.exports = {
     });
 
     reviewsArray.push({
-      content: 'Wenlo',
+      content: 'Nice!',
       userId: 3,
       bookId: 1,
       score: 5,
@@ -34,8 +34,8 @@ module.exports = {
     });
 
     reviewsArray.push({
-      content: 'rica anabeth',
-      userId: 1,
+      content: 'There is a pretty girl in that book',
+      userId: 3,
       bookId: 3,
       score: 5,
       createdAt: new Date(),
@@ -43,10 +43,19 @@ module.exports = {
     });
 
     reviewsArray.push({
-      content: 'Manso libro',
+      content: 'Awesome book!',
       userId: 2,
-      bookId: 4,
+      bookId: 6,
       score: 5,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    reviewsArray.push({
+      content: 'Loving it!',
+      userId: 2,
+      bookId: 8,
+      score: 4,
       createdAt: new Date(),
       updatedAt: new Date(),
     });

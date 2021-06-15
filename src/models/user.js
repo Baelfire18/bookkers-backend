@@ -59,6 +59,13 @@ module.exports = (sequelize, DataTypes) => {
         len: [6, 200],
       },
     },
+    admin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     sequelize,
     modelName: 'user',
