@@ -9,7 +9,7 @@ const BookSerializer = new JSONAPISerializer('books', {
 const ReviewSerializer = new JSONAPISerializer('reviews', {
   attributes: ['content', 'score', 'userId', 'bookId'],
   keyForAttribute: 'camelCase',
-})
+});
 
 const BookReviewSerializer = new JSONAPISerializer('reviews', {
   attributes: ['title', 'isbn', 'author', 'genre', 'userId', 'description'],
@@ -31,8 +31,6 @@ router.get('api.books', '/', async (ctx) => {
     ctx.body = BookSerializer.serialize(books);
 });
 
-
-
 router.post('api.books.create', '/', async (ctx) => {
     try {
       const book = ctx.orm.book.build(ctx.request.body);
@@ -52,7 +50,6 @@ router.get('api.books', '/:id', async (ctx) => {
   ctx.body = BookSerializer.serialize(book);
 });
 
-
 router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
   const { book } = ctx.state;
   try {
@@ -68,7 +65,7 @@ router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
   catch (ValidationError) {
     ctx.throw(400, 'Bad Request');
   }
-})
+});
 
 router.get('api.books.review.one', '/:id_book/reviews/:id_review', async (ctx) => {
   const { id_book , id_review } = ctx.params;
@@ -84,7 +81,7 @@ router.get('api.books.review', '/:id/reviews', loadBook, async (ctx) => {
     ctx.throw(404, "The book you are looking for doesn't have any reviews");
   }
   ctx.body = json;
-})
+});
 
 router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => {
   try {
@@ -99,5 +96,20 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
   }
 })
 
+<<<<<<< HEAD
+=======
+router.get('api.books', '/:id1/reviews/:id2', async (ctx) => {
+  console.log(ctx.params);
+  const book = await ctx.orm.book.findByPk(ctx.params.id1);
+  const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2 } });
+  console.log(review);
+  if (!review) {
+    ctx.throw(404, "This review does not exists for this book");
+  }
+  const json = ReviewSerializer.serialize(review);
+  ctx.body = json;
+});
+
+>>>>>>> 9243bee370159cebfed291390a2efdbb6d1a42ac
 
 module.exports = router;
