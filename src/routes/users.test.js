@@ -27,6 +27,32 @@ describe('User API routes', () => {
     await app.context.orm.sequelize.close();
   });
 
+  // describe('GET /users/me', () => {
+    
+  //   const authorizedGetUser = (id) => request
+  //   .get(`/users/me`)
+  //   .auth(auth.access_token, { type: 'bearer' });
+  //   const unauthorizedGetUser = (id) => request.get(`/users/me`);
+
+  //   describe('when passed id corresponds to logged user', () => {
+  //     beforeAll(async () => {
+  //       response = await request.get(`/users/me`).auth(auth.access_token, { type: 'bearer' });
+  //     });
+
+  //     test('responds with 200 status code', () => {
+  //       expect(response.status).toBe(200);
+  //     });
+
+  //     test('responds with a json body type', () => {
+  //       expect(response.type).toEqual('application/json');
+  //     });
+
+  //     test('body matches snapshot', () => {
+  //       expect(response.body).toMatchSnapshot();
+  //     });
+  //   });
+  // });
+
   describe('GET /users/:id', () => {
     let user;
     let response;

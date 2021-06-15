@@ -14,6 +14,8 @@ Object {
 }
 `;
 
+exports[`User API routes GET /users/:id when passed id corresponds to logged user body matches snapshot 1`] = `Object {}`;
+
 exports[`User API routes POST /users user data is valid response body matches snapshot 1`] = `
 Object {
   "data": Object {

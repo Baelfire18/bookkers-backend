@@ -80,6 +80,8 @@ describe('Book API routes', () => {
     });
   });
 
+  // describe('GET /book')
+
   describe('POST /books', () => {
     const bookData = {
       title: 'Test Book2',
@@ -131,24 +133,6 @@ describe('Book API routes', () => {
           title, isbn, author, genre, userId, description,
         };
         expect(sanitizedBook).toEqual(bookData);
-      });
-    });
-
-    describe('book data is invalid', () => {
-      test('responds with 400 status code', async () => {
-        const invalidBodies = [
-          {},
-          { title: 'John' },
-          { description: 'Doe' },
-          { title: 'John', isbn: 'Doe', genreee: '345678987654' },
-          {
-            title: 'John', isbn: 'Doe', genre: 'nazhe@uc.cl', author: '123456', userId: 6, description: 5,
-          },
-        ];
-        await Promise.all(invalidBodies.map(authorizedPostBook))
-          .then((responses) => {
-            responses.forEach((response) => expect(response.status).toBe(400));
-          });
       });
     });
 
