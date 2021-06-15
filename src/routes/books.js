@@ -70,6 +70,12 @@ router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
   }
 })
 
+router.get('api.books.review.one', '/:id_book/reviews/:id_review', async (ctx) => {
+  const { id_book , id_review } = ctx.params;
+  ctx.body = ctx.params;
+})
+
+
 router.get('api.books.review', '/:id/reviews', loadBook, async (ctx) => {
   const { book } = ctx.state;
   const reviews = await book.getReviews();
@@ -92,5 +98,6 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
     ctx.throw(404, "FAILED");
   }
 })
+
 
 module.exports = router;
