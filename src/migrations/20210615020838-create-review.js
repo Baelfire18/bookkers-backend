@@ -9,16 +9,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       content: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       userId: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       bookId: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       score: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

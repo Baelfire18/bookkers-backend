@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     isbn: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
       },
