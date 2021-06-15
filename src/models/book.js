@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     isbn: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -45,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     userId: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true,

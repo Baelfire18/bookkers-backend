@@ -18,7 +18,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       userId: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       genre: {
         type: Sequelize.STRING
