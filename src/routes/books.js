@@ -97,8 +97,12 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 router.get('api.books', '/:id1/reviews/:id2', async (ctx) => {
+=======
+router.get('api.books.review', '/:id1/reviews/:id2', async (ctx) => {
+>>>>>>> da309e5ed1523c292632b193580eceb10f30e642
   console.log(ctx.params);
   const book = await ctx.orm.book.findByPk(ctx.params.id1);
   const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2 } });
@@ -110,6 +114,28 @@ router.get('api.books', '/:id1/reviews/:id2', async (ctx) => {
   ctx.body = json;
 });
 
+<<<<<<< HEAD
 >>>>>>> 9243bee370159cebfed291390a2efdbb6d1a42ac
+=======
+router.patch('api.booksreviewedit', '/:id1/reviews/:id2', loadBook, async (ctx) => {
+  try {
+    const { book } = ctx.state;
+    const review = ctx.orm.review.build(ctx.request.body);
+    const {
+      content, score, userId, bookId
+    } = review;
+    await review.update({
+      content, score, userId, bookId
+    });
+    ctx.status = 201;
+    ctx.body = ReviewSerializer.serialize(review);
+  }
+  catch { 
+    ctx.throw(404, "FAILED");
+  }
+})
+
+
+>>>>>>> da309e5ed1523c292632b193580eceb10f30e642
 
 module.exports = router;
