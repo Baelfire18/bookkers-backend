@@ -11,24 +11,13 @@ const ReviewSerializer = new JSONAPISerializer('reviews', {
   keyForAttribute: 'camelCase',
 });
 
-const BookReviewSerializer = new JSONAPISerializer('reviews', {
-  attributes: ['title', 'isbn', 'author', 'genre', 'userId', 'description'],
-  reviews: {
-    ref: function(book, review) {
-      return review.id;
-    },
-    attributes: ['content', 'score', 'userId', 'bookId']
-  },
-  keyForAttribute: 'camelCase',
-});
-
 const router = new KoaRouter();
 
 const { loadBook } = require('../middlewares/books');
 
 router.get('api.books.index', '/', async (ctx) => {
     const books = await ctx.orm.book.findAll();
-    ctx.body = BookSerializer.serialize(books);
+    ctx.body = BookSerializer.serialize(books), null, 2;
 });
 
 router.post('api.books.create', '/', async (ctx) => {
@@ -94,8 +83,8 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
 
 router.get('api.books.review', '/:id/reviews/:id2', async (ctx) => {
   console.log(ctx.params);
-  const book = await ctx.orm.book.findByPk(ctx.params.id);
-  const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2 } });
+  const book = await ctx.orm.book.findByPk(ctx.params.id1);
+  const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2, bookId: book.id } });
   console.log(review);
   if (!review) {
     ctx.throw(404, "This review does not exists for this book");
@@ -107,12 +96,12 @@ router.get('api.books.review', '/:id/reviews/:id2', async (ctx) => {
 router.patch('api.books.review.edit', '/:id/reviews/:id2', loadBook, async (ctx) => {
   try {
     const { book } = ctx.state;
-    const review = await ctx.orm.review.findByPk(ctx.params.id2);
+    const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2, bookId: book.id } });
     const {
       content, score, userId, bookId
     } = ctx.request.body;
     await review.update({
-      content, score, userId, bookId
+      content, userId, bookId, score
     });
     ctx.status = 201;
     ctx.body = ReviewSerializer.serialize(review);

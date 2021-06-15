@@ -44,6 +44,7 @@
     "webpack-manifest-plugin": "^2.2.0"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "jsonapi-serializer": "^3.6.7",
