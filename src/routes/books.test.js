@@ -10,7 +10,7 @@ describe('Book API routes', () => {
     lastName: 'UserBook',
     email: 'testbook@gmail.com',
     password: 'testbookPassword',
-    admin: 0
+    admin: 0,
   };
 
   beforeAll(async () => {
@@ -31,12 +31,12 @@ describe('Book API routes', () => {
     let book;
     let response;
     const bookData = {
-        title: 'Test Book',
-        isbn: '9786124497099',
-        author: 'Testman',
-        genre: 'Test',
-        userId: 1,
-        description: 'testbook'
+      title: 'Test Book',
+      isbn: '9786124497099',
+      author: 'Testman',
+      genre: 'Test',
+      userId: 1,
+      description: 'testbook',
     };
     const authorizedGetBook = (id) => request
       .get(`/books/${id}`)
@@ -82,12 +82,12 @@ describe('Book API routes', () => {
 
   describe('POST /books', () => {
     const bookData = {
-        title: 'Test Book2',
-        isbn: '97861244970992',
-        author: 'Testman2',
-        genre: 'Test2',
-        userId: 1,
-        description: 'testbook2'
+      title: 'Test Book2',
+      isbn: '97861244970992',
+      author: 'Testman2',
+      genre: 'Test2',
+      userId: 1,
+      description: 'testbook2',
     };
     const authorizedPostBook = (body) => request
       .post('/books')
@@ -124,8 +124,12 @@ describe('Book API routes', () => {
 
       test('post request actually created the given book', async () => {
         const book = await app.context.orm.book.findByPk(response.body.data.id);
-        const { title, isbn, author, genre, userId, description } = book.dataValues;
-        const sanitizedBook = { title, isbn, author, genre, userId, description };
+        const {
+          title, isbn, author, genre, userId, description,
+        } = book.dataValues;
+        const sanitizedBook = {
+          title, isbn, author, genre, userId, description,
+        };
         expect(sanitizedBook).toEqual(bookData);
       });
     });
@@ -137,7 +141,9 @@ describe('Book API routes', () => {
           { title: 'John' },
           { description: 'Doe' },
           { title: 'John', isbn: 'Doe', genreee: '345678987654' },
-          { title: 'John', isbn: 'Doe', genre: 'nazhe@uc.cl', author: "123456", userId: 6, description: 5 },
+          {
+            title: 'John', isbn: 'Doe', genre: 'nazhe@uc.cl', author: '123456', userId: 6, description: 5,
+          },
         ];
         await Promise.all(invalidBodies.map(authorizedPostBook))
           .then((responses) => {

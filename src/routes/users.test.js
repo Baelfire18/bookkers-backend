@@ -10,7 +10,7 @@ describe('User API routes', () => {
     lastName: 'User',
     email: 'test@gmail.com',
     password: 'testPassword',
-    admin: 0
+    admin: 0,
   };
 
   beforeAll(async () => {
@@ -35,7 +35,7 @@ describe('User API routes', () => {
       lastName: 'Doe',
       email: 'afro@uc.cl',
       password: '123456',
-      admin: 0
+      admin: 0,
     };
     const authorizedGetUser = (id) => request
       .get(`/users/${id}`)
@@ -83,9 +83,9 @@ describe('User API routes', () => {
     const userData = {
       firstName: 'John',
       lastName: 'Doe',
-      email: "cacunazhe@uc.cl",
-      password: "123456",
-      admin: 0
+      email: 'cacunazhe@uc.cl',
+      password: '123456',
+      admin: 0,
     };
     const authorizedPostUser = (body) => request
       .post('/users')
@@ -122,13 +122,17 @@ describe('User API routes', () => {
 
       test('post request actually created the given user', async () => {
         const user = await app.context.orm.user.findByPk(response.body.data.id);
-        const { firstName, lastName, email, admin } = user.dataValues;
-        const sanitizedUser = { firstName, lastName, email, admin };
+        const {
+          firstName, lastName, email, admin,
+        } = user.dataValues;
+        const sanitizedUser = {
+          firstName, lastName, email, admin,
+        };
         const userDataPassword = {
-            firstName: 'John',
-            lastName: 'Doe',
-            email: "cacunazhe@uc.cl",
-            admin: 0
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'cacunazhe@uc.cl',
+          admin: 0,
         };
         expect(sanitizedUser).toEqual(userDataPassword);
       });
@@ -141,7 +145,9 @@ describe('User API routes', () => {
           { firstName: 'John' },
           { lastName: 'Doe' },
           { firstName: 'John', lastName: 'Doe', email: '345678987654' },
-          { firstName: 'John', last_name: 'Doe', email: 'nazhe@uc.cl', password: "123456", admin: 6 },
+          {
+            firstName: 'John', last_name: 'Doe', email: 'nazhe@uc.cl', password: '123456', admin: 6,
+          },
         ];
         await Promise.all(invalidBodies.map(authorizedPostUser))
           .then((responses) => {
