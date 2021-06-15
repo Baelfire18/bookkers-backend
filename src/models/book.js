@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         notEmpty: true,
+        len: [12, 20],
       },
     },
     author: {

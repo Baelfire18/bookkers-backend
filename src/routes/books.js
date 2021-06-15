@@ -6,7 +6,16 @@ const BookSerializer = new JSONAPISerializer('books', {
   keyForAttribute: 'camelCase',
 });
 
-const BookReviewSerializer = new JSONAPISerializer('')
+const BookReviewSerializer = new JSONAPISerializer('books', {
+  attributes: ['title', 'isbn', 'author', 'genre', 'userId', 'description'],
+  reviews: {
+    ref: function(book, review) {
+      return review.id;
+    },
+    attributes: ['content', 'score', 'userId', 'bookId']
+  },
+  keyForAttribute: 'camelCase',
+});
 
 const router = new KoaRouter();
 
@@ -56,11 +65,26 @@ router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
   }
 })
 
+
 router.get('api.books.review', '/:id/reviews', loadBook, async (ctx) =>{
   const { book } = ctx.state;
   const reviews = await book.getReviews();
-
-
+  const json = BookReviewSerializer.serialize(reviews);
+  if (json['data'].length === 0) {
+    ctx.throw(404, "The book you are looking for doesn't have any reviews");
+  }
+  ctx.body = json;
 })
+
+
+router.get('api.books', '/:id/reviews/:id', async (ctx) => {
+  console.log(ctx.params);
+  const book = await ctx.orm.book.findByPk(ctx.params.id);
+  if (!book) {
+    ctx.throw(404, "The book you are looking for doesn't exist");
+  }
+  ctx.body = BookSerializer.serialize(book);
+})
+
 
 module.exports = router;
