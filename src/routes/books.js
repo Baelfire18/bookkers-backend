@@ -78,6 +78,9 @@ router.use(apiSetCurrentUser);
 // CREATE A BOOK
 
 router.post('api.books.create', '/', async (ctx) => {
+  const is_book = await ctx.orm.book.findOne({ where: { isbn: ctx.request.body.isbn } });
+  console.log(is_book);
+  if (is_book) ctx.throw(401, 'ISBN code alreay exist!');
   try {
     const book = ctx.orm.book.build(ctx.request.body);
     book.userId = ctx.state.currentUser.id;
@@ -93,7 +96,12 @@ router.post('api.books.create', '/', async (ctx) => {
 
 router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
   const { book } = ctx.state;
-  if (ctx.state.currentUser.id != book.userId) ctx.throw(401, "AUTHENTIFICATION ERROR");
+  if (ctx.state.currentUser.id != book.userId && !ctx.state.currentUser.admin) ctx.throw(401, "AUTHENTIFICATION ERROR");
+
+  const is_isbn = await ctx.orm.book.findOne({ where: { isbn: ctx.request.body.isbn } });
+  if (is_isbn && book.id !== is_isbn.id) ctx.throw(401, 'ISBN code alreay exist!');
+
+
   try {
     const {
       title, isbn, author, genre, description
