@@ -11,13 +11,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.user, { foreignKey: { allowNull: false } });
+      this.belongsTo(models.book, { foreignKey: { allowNull: false } });
     }
   };
   review.init({
-    content: DataTypes.STRING,
-    userId: DataTypes.BIGINT,
-    bookId: DataTypes.BIGINT,
-    score: DataTypes.BIGINT,
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    bookId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    score: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     sequelize,
     modelName: 'review',

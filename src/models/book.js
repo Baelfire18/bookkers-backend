@@ -11,15 +11,53 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.user, { foreignKey: { allowNull: false } });
+      this.hasMany(models.review);
     }
   };
   book.init({
-    title: DataTypes.STRING,
-    isbn: DataTypes.STRING,
-    author: DataTypes.STRING,
-    genre: DataTypes.STRING,
-    userId: DataTypes.BIGINT,
-    description: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    isbn: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    genre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     sequelize,
     modelName: 'book',
