@@ -12,7 +12,7 @@ module.exports = {
       author: 'Rick Riordan',
       genre: 'Literatura Fantástica',
       userId: 1,
-      description: 'Fue',
+      description: 'Fue Luke el hijo de Hermes',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
