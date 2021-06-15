@@ -93,7 +93,7 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
 router.get('api.books.review', '/:id1/reviews/:id2', async (ctx) => {
   console.log(ctx.params);
   const book = await ctx.orm.book.findByPk(ctx.params.id1);
-  const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2 } });
+  const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2, bookId: book.id } });
   console.log(review);
   if (!review) {
     ctx.throw(404, "This review does not exists for this book");
@@ -102,15 +102,15 @@ router.get('api.books.review', '/:id1/reviews/:id2', async (ctx) => {
   ctx.body = json;
 });
 
-router.patch('api.booksreviewedit', '/:id1/reviews/:id2', loadBook, async (ctx) => {
+router.patch('api.books.review.edit', '/:id1/reviews/:id2', async (ctx) => {
+  console.log(ctx.request.body);
   try {
-    const { book } = ctx.state;
-    const review = ctx.orm.review.build(ctx.request.body);
+    const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2 } });
     const {
-      content, score, userId, bookId
-    } = review;
+      content, userId, bookId, score
+    } = ctx.orm.review.build(ctx.request.body);;
     await review.update({
-      content, score, userId, bookId
+      content, userId, bookId, score
     });
     ctx.status = 201;
     ctx.body = ReviewSerializer.serialize(review);
