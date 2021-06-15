@@ -90,7 +90,7 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
   }
 })
 
-router.get('api.books', '/:id1/reviews/:id2', async (ctx) => {
+router.get('api.books.review', '/:id1/reviews/:id2', async (ctx) => {
   console.log(ctx.params);
   const book = await ctx.orm.book.findByPk(ctx.params.id1);
   const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2 } });
@@ -101,6 +101,25 @@ router.get('api.books', '/:id1/reviews/:id2', async (ctx) => {
   const json = ReviewSerializer.serialize(review);
   ctx.body = json;
 });
+
+router.patch('api.booksreviewedit', '/:id1/reviews/:id2', loadBook, async (ctx) => {
+  try {
+    const { book } = ctx.state;
+    const review = ctx.orm.review.build(ctx.request.body);
+    const {
+      content, score, userId, bookId
+    } = review;
+    await review.update({
+      content, score, userId, bookId
+    });
+    ctx.status = 201;
+    ctx.body = ReviewSerializer.serialize(review);
+  }
+  catch { 
+    ctx.throw(404, "FAILED");
+  }
+})
+
 
 
 module.exports = router;
