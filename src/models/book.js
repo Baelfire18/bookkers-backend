@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class book extends Model {
     /**
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.user, { foreignKey: { allowNull: false } });
       this.hasMany(models.review);
     }
-  };
+  }
   book.init({
     title: {
       type: DataTypes.STRING,
@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
-      unique: true,
       validate: {
         notEmpty: true,
         len: [12, 20],

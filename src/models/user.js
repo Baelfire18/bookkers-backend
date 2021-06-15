@@ -1,6 +1,5 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 const bcrypt = require('bcrypt');
@@ -26,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.book);
       this.hasMany(models.review);
     }
-  };
+  }
   user.init({
     firstName: {
       type: DataTypes.STRING,
@@ -46,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
-      unique: true,
       validate: {
         notEmpty: true,
       },
@@ -91,7 +89,6 @@ module.exports = (sequelize, DataTypes) => {
     });
   });
   /* eslint-enable no-param-reassign */
-
 
   return user;
 };

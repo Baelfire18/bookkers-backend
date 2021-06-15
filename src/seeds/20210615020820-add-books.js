@@ -137,7 +137,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    
+
     return Book.bulkCreate(booksArray);
   },
 

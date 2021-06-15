@@ -45,7 +45,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    
+
     return User.bulkCreate(usersArray);
   },
 
