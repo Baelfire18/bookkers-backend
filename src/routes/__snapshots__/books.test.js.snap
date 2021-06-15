@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Book API routes GET /books/:id when passed id corresponds to an existing book body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "author": "Testman",
+      "description": "testbook",
+      "genre": "Test",
+      "isbn": "9786124497099",
+      "title": "Test Book",
+      "userId": 1,
+    },
+    "id": "1",
+    "type": "books",
+  },
+}
+`;
+
+exports[`Book API routes POST /books book data is valid response body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "author": "Testman2",
+      "description": "testbook2",
+      "genre": "Test2",
+      "isbn": "97861244970992",
+      "title": "Test Book2",
+      "userId": 1,
+    },
+    "id": "2",
+    "type": "books",
+  },
+}
+`;

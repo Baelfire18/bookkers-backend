@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User API routes GET /users/:id when passed id corresponds to an existing user body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "email": "afro@uc.cl",
+      "firstName": "John",
+      "lastName": "Doe",
+    },
+    "id": "2",
+    "type": "users",
+  },
+}
+`;
+
+exports[`User API routes POST /users user data is valid response body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "email": "cacunazhe@uc.cl",
+      "firstName": "John",
+      "lastName": "Doe",
+    },
+    "id": "3",
+    "type": "users",
+  },
+}
+`;
