@@ -80,7 +80,20 @@ Object {
 }
 `;
 
-exports[`Book API routes PATCH /books/:book_id/reviews/:review_id when patched correctly body matches snapshot 1`] = `Object {}`;
+exports[`Book API routes PATCH /books/:book_id/reviews/:review_id when patched correctly body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "bookId": 1,
+      "content": "nazhe el libro jajajaja",
+      "score": 3,
+      "userId": 1,
+    },
+    "id": "1",
+    "type": "reviews",
+  },
+}
+`;
 
 exports[`Book API routes PATCH /books/:id when patched correctly body matches snapshot 1`] = `
 Object {
