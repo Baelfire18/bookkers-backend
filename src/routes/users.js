@@ -17,6 +17,20 @@ const router = new KoaRouter();
 
 const { loadUser } = require('../middlewares/users');
 
+// CREATE A NEW USER
+
+router.post('api.users.create', '/', async (ctx) => {
+  try {
+    const user = ctx.orm.user.build(ctx.request.body);
+    user.admin = 0;
+    await user.save({ fields: ['firstName', 'lastName', 'email', 'password', 'admin'] });
+    ctx.status = 201;
+    ctx.body = UserSerializer.serialize(user);
+  } catch (ValidationError) {
+    ctx.throw(400, 'Bad request');
+  }
+});
+
 router.use(jwt({ secret: process.env.JWT_SECRET, key: 'authData' }));
 router.use(apiSetCurrentUser);
 
@@ -40,24 +54,11 @@ router.get('api.users', '/:id', async (ctx) => {
   ctx.body = UserSerializer.serialize(user);
 });
 
-// CREATE A NEW USER
-
-router.post('api.users.create', '/', async (ctx) => {
-  try {
-    const user = ctx.orm.user.build(ctx.request.body);
-    user.admin = 0;
-    await user.save({ fields: ['firstName', 'lastName', 'email', 'password', 'admin'] });
-    ctx.status = 201;
-    ctx.body = UserSerializer.serialize(user);
-  } catch (ValidationError) {
-    ctx.throw(400, 'Bad request');
-  }
-});
-
 // EDIT AN EXISTENT USER
 
 router.patch('api.users.patch', '/:id', loadUser, async (ctx) => {
   const { user } = ctx.state;
+  if (ctx.state.currentUser.id !== user.id) ctx.throw(401, "NOT AUTHORIZED");
   try {
     const {
       firstName, lastName, email, password,

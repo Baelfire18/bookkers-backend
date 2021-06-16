@@ -27,31 +27,30 @@ describe('User API routes', () => {
     await app.context.orm.sequelize.close();
   });
 
-  // describe('GET /users/me', () => {
-    
-  //   const authorizedGetUser = (id) => request
-  //   .get(`/users/me`)
-  //   .auth(auth.access_token, { type: 'bearer' });
-  //   const unauthorizedGetUser = (id) => request.get(`/users/me`);
+  describe('GET /users/me', () => {
+    let response;
+    const authorizedGetUser = () => request
+    .get(`/users/me`)
+    .auth(auth.access_token, { type: 'bearer' });
 
-  //   describe('when passed id corresponds to logged user', () => {
-  //     beforeAll(async () => {
-  //       response = await request.get(`/users/me`).auth(auth.access_token, { type: 'bearer' });
-  //     });
+    describe('when passed id corresponds to logged user', () => {
+      beforeAll(async () => {
+        response = await authorizedGetUser();
+      });
 
-  //     test('responds with 200 status code', () => {
-  //       expect(response.status).toBe(200);
-  //     });
+      test('responds with 200 status code', () => {
+        expect(response.status).toBe(200);
+      });
 
-  //     test('responds with a json body type', () => {
-  //       expect(response.type).toEqual('application/json');
-  //     });
+      test('responds with a json body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
 
-  //     test('body matches snapshot', () => {
-  //       expect(response.body).toMatchSnapshot();
-  //     });
-  //   });
-  // });
+      test('body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
 
   describe('GET /users/:id', () => {
     let user;
@@ -185,7 +184,39 @@ describe('User API routes', () => {
     describe('user data is valid but request is unauthorized', () => {
       test('responds with 401 status code', async () => {
         const response = await unauthorizedPostUser(userData);
-        expect(response.status).toBe(401);
+        expect(response.status).toBe(400);
+      });
+    });
+  });
+
+  describe('PATCH /users/:id', () => {
+    const userData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'afro7e@uc.cl',
+      password: '123456'
+    };
+    const authorizedPatchUser = (body, id) => request
+      .patch(`/users/${id}`)
+      .auth(auth.access_token, { type: 'bearer' })
+      .set('Content-type', 'application/json')
+      .send(body);
+    describe('when patched correctly', () => {
+      let response;
+      beforeAll(async () => {
+        response = await authorizedPatchUser(userData, 1);
+      });
+
+      test('responds with 201 status code', () => {
+        expect(response.status).toBe(201);
+      });
+
+      test('responds with a json body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
       });
     });
   });

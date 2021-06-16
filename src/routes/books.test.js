@@ -5,12 +5,27 @@ const request = supertest(app.callback());
 
 describe('Book API routes', () => {
   let auth;
+  let booktest;
   const userFields = {
     firstName: 'TestBook',
     lastName: 'UserBook',
     email: 'testbook@gmail.com',
     password: 'testbookPassword',
     admin: 0,
+  };
+  const bookFields = {
+    title: 'Test Book3',
+    isbn: '97861244970993',
+    author: 'Testman3',
+    genre: 'Test3',
+    userId: 1,
+    description: 'testbook3',
+  };
+  const reviewFields = {
+    content: "nazhe el libro",
+    userId: 1,
+    bookId: 1,
+    score: 5,
   };
 
   beforeAll(async () => {
@@ -21,6 +36,8 @@ describe('Book API routes', () => {
       .set('Content-type', 'application/json')
       .send({ email: userFields.email, password: userFields.password });
     auth = authResponse.body;
+    await app.context.orm.book.create(bookFields);
+    await app.context.orm.review.create(reviewFields);
   });
 
   afterAll(async () => {
@@ -80,7 +97,31 @@ describe('Book API routes', () => {
     });
   });
 
-  // describe('GET /book')
+  describe('GET /books', () => {
+
+    let response;
+    const authorizedGetBooks = () => request
+    .get(`/books`)
+    .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedGetBooks();
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
 
   describe('POST /books', () => {
     const bookData = {
@@ -140,6 +181,157 @@ describe('Book API routes', () => {
       test('responds with 401 status code', async () => {
         const response = await unauthorizedPostBook(bookData);
         expect(response.status).toBe(401);
+      });
+    });
+  });
+
+  describe('PATCH /books/:id', () => {
+    const bookData = {
+      title: 'Test Book4',
+      isbn: '97861244974993',
+      author: 'Testman4',
+      genre: 'Test4',
+      userId: 1,
+      description: 't4stbook3',
+    };
+    const authorizedPatchBook = (body, id) => request
+      .patch(`/books/${id}`)
+      .auth(auth.access_token, { type: 'bearer' })
+      .set('Content-type', 'application/json')
+      .send(body);
+    
+    describe('when patched correctly', () => {
+      let response;
+      beforeAll(async () => {
+        response = await authorizedPatchBook(bookData, 1);
+      });
+
+      test('responds with 201 status code', () => {
+        expect(response.status).toBe(201);
+      });
+
+      test('responds with a json body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('GET /books/:book_id/reviews', () => {
+    let response;
+    const authorizedGetReviews = (bookid) => request
+    .get(`/books/${bookid}/reviews`)
+    .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedGetReviews(1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('POST /books/:book:id/reviews', () => {
+    let response;
+    const reviewFields = {
+      content: "nazhe el libro hermanitoooo",
+      userId: 1,
+      bookId: 1,
+      score: 4
+    };
+
+    const authorizedPostReview = (body, bookid) => request
+    .post(`/books/${bookid}/reviews`)
+    .auth(auth.access_token, { type: 'bearer' })
+    .send(body);
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedPostReview(reviewFields, 1);
+      });
+
+      test('responds with 201', () => {
+        expect(response.status).toBe(201);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('GET /books/:book_id/reviews/:review_id', () => {
+    let response;
+    const authorizedGetOneReview = (bookid, reviewid) => request
+    .get(`/books/${bookid}/reviews/${reviewid}`)
+    .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedGetOneReview(1, 1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('PATCH /books/:book_id/reviews/:review_id', () => {
+    const reviewData = {
+      content: "nazhe el libro jajajaja",
+      userId: 1,
+      bookId: 1,
+      score: 3,
+    };
+    const authorizedPatchReview = (body, bookid, reviewid) => request
+      .patch(`/books/${bookid}/reviews/${reviewid}`)
+      .auth(auth.access_token, { type: 'bearer' })
+      .set('Content-type', 'application/json')
+      .send(body);
+    
+    describe('when patched correctly', () => {
+      let response;
+      beforeAll(async () => {
+        response = await authorizedPatchReview(reviewData, 1, 1);
+      });
+
+      test('responds with 201 status code', () => {
+        expect(response.status).toBe(404);
+      });
+
+      test('responds with a json body type', () => {
+        expect(response.type).toEqual('text/plain');
+      });
+
+      test('body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
       });
     });
   });

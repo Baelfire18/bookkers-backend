@@ -14,7 +14,33 @@ Object {
 }
 `;
 
-exports[`User API routes GET /users/:id when passed id corresponds to logged user body matches snapshot 1`] = `Object {}`;
+exports[`User API routes GET /users/me when passed id corresponds to logged user body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "email": "test@gmail.com",
+      "firstName": "Test",
+      "lastName": "User",
+    },
+    "id": "1",
+    "type": "users",
+  },
+}
+`;
+
+exports[`User API routes PATCH /users/:id when patched correctly body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "email": "afro7e@uc.cl",
+      "firstName": "John",
+      "lastName": "Doe",
+    },
+    "id": "1",
+    "type": "users",
+  },
+}
+`;
 
 exports[`User API routes POST /users user data is valid response body matches snapshot 1`] = `
 Object {
