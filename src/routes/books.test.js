@@ -321,11 +321,11 @@ describe('Book API routes', () => {
       });
 
       test('responds with 201 status code', () => {
-        expect(response.status).toBe(404);
+        expect(response.status).toBe(201);
       });
 
       test('responds with a json body type', () => {
-        expect(response.type).toEqual('text/plain');
+        expect(response.type).toEqual('application/json');
       });
 
       test('body matches snapshot', () => {
