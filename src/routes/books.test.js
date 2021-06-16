@@ -5,7 +5,6 @@ const request = supertest(app.callback());
 
 describe('Book API routes', () => {
   let auth;
-  let booktest;
   const userFields = {
     firstName: 'TestBook',
     lastName: 'UserBook',
@@ -22,7 +21,7 @@ describe('Book API routes', () => {
     description: 'testbook3',
   };
   const reviewFields = {
-    content: "nazhe el libro",
+    content: 'nazhe el libro',
     userId: 1,
     bookId: 1,
     score: 5,
@@ -98,11 +97,10 @@ describe('Book API routes', () => {
   });
 
   describe('GET /books', () => {
-
     let response;
     const authorizedGetBooks = () => request
-    .get(`/books`)
-    .auth(auth.access_token, { type: 'bearer' });
+      .get('/books')
+      .auth(auth.access_token, { type: 'bearer' });
 
     describe('route response is valid', () => {
       beforeAll(async () => {
@@ -199,7 +197,7 @@ describe('Book API routes', () => {
       .auth(auth.access_token, { type: 'bearer' })
       .set('Content-type', 'application/json')
       .send(body);
-    
+
     describe('when patched correctly', () => {
       let response;
       beforeAll(async () => {
@@ -223,8 +221,8 @@ describe('Book API routes', () => {
   describe('GET /books/:book_id/reviews', () => {
     let response;
     const authorizedGetReviews = (bookid) => request
-    .get(`/books/${bookid}/reviews`)
-    .auth(auth.access_token, { type: 'bearer' });
+      .get(`/books/${bookid}/reviews`)
+      .auth(auth.access_token, { type: 'bearer' });
 
     describe('route response is valid', () => {
       beforeAll(async () => {
@@ -247,21 +245,21 @@ describe('Book API routes', () => {
 
   describe('POST /books/:book:id/reviews', () => {
     let response;
-    const reviewFields = {
-      content: "nazhe el libro hermanitoooo",
+    const reviewFieldsPost = {
+      content: 'nazhe el libro hermanitoooo',
       userId: 1,
       bookId: 1,
-      score: 4
+      score: 4,
     };
 
     const authorizedPostReview = (body, bookid) => request
-    .post(`/books/${bookid}/reviews`)
-    .auth(auth.access_token, { type: 'bearer' })
-    .send(body);
+      .post(`/books/${bookid}/reviews`)
+      .auth(auth.access_token, { type: 'bearer' })
+      .send(body);
 
     describe('route response is valid', () => {
       beforeAll(async () => {
-        response = await authorizedPostReview(reviewFields, 1);
+        response = await authorizedPostReview(reviewFieldsPost, 1);
       });
 
       test('responds with 201', () => {
@@ -281,8 +279,8 @@ describe('Book API routes', () => {
   describe('GET /books/:book_id/reviews/:review_id', () => {
     let response;
     const authorizedGetOneReview = (bookid, reviewid) => request
-    .get(`/books/${bookid}/reviews/${reviewid}`)
-    .auth(auth.access_token, { type: 'bearer' });
+      .get(`/books/${bookid}/reviews/${reviewid}`)
+      .auth(auth.access_token, { type: 'bearer' });
 
     describe('route response is valid', () => {
       beforeAll(async () => {
@@ -305,7 +303,7 @@ describe('Book API routes', () => {
 
   describe('PATCH /books/:book_id/reviews/:review_id', () => {
     const reviewData = {
-      content: "nazhe el libro jajajaja",
+      content: 'nazhe el libro jajajaja',
       userId: 1,
       bookId: 1,
       score: 3,
@@ -315,7 +313,7 @@ describe('Book API routes', () => {
       .auth(auth.access_token, { type: 'bearer' })
       .set('Content-type', 'application/json')
       .send(body);
-    
+
     describe('when patched correctly', () => {
       let response;
       beforeAll(async () => {

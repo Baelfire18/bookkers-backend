@@ -30,8 +30,8 @@ describe('User API routes', () => {
   describe('GET /users/me', () => {
     let response;
     const authorizedGetUser = () => request
-    .get(`/users/me`)
-    .auth(auth.access_token, { type: 'bearer' });
+      .get('/users/me')
+      .auth(auth.access_token, { type: 'bearer' });
 
     describe('when passed id corresponds to logged user', () => {
       beforeAll(async () => {
@@ -194,7 +194,7 @@ describe('User API routes', () => {
       firstName: 'John',
       lastName: 'Doe',
       email: 'afro7e@uc.cl',
-      password: '123456'
+      password: '123456',
     };
     const authorizedPatchUser = (body, id) => request
       .patch(`/users/${id}`)

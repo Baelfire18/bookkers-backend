@@ -58,7 +58,7 @@ router.get('api.users', '/:id', async (ctx) => {
 
 router.patch('api.users.patch', '/:id', loadUser, async (ctx) => {
   const { user } = ctx.state;
-  if (ctx.state.currentUser.id !== user.id) ctx.throw(401, "NOT AUTHORIZED");
+  if (ctx.state.currentUser.id !== user.id) ctx.throw(401, 'NOT AUTHORIZED');
   try {
     const {
       firstName, lastName, email, password,
