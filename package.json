@@ -11,7 +11,8 @@
     "build-assets": "yarn run clean-assets && NODE_ENV=production webpack -p",
     "clean-assets": "rm -rf build/assets",
     "heroku-postbuild": "yarn run build-assets && sequelize db:migrate",
-    "test": "jest"
+    "test": "set NODE_ENV=test&& jest --runInBand --detectOpenHandles --forceExit",
+    "server": "set NODE_ENV=development&& nodemon app.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

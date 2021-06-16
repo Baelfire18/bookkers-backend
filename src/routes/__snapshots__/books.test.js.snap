@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Book API routes GET /books route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attributes": Object {
+        "author": "Testman3",
+        "description": "testbook3",
+        "genre": "Test3",
+        "isbn": "97861244970993",
+        "title": "Test Book3",
+        "userId": 1,
+      },
+      "id": "1",
+      "type": "books",
+    },
+    Object {
+      "attributes": Object {
+        "author": "Testman",
+        "description": "testbook",
+        "genre": "Test",
+        "isbn": "9786124497099",
+        "title": "Test Book",
+        "userId": 1,
+      },
+      "id": "2",
+      "type": "books",
+    },
+  ],
+}
+`;
+
+exports[`Book API routes GET /books/:book_id/reviews route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attributes": Object {
+        "bookId": "1",
+        "content": "nazhe el libro",
+        "score": "5",
+        "userId": "1",
+      },
+      "id": "1",
+      "type": "reviews",
+    },
+  ],
+}
+`;
+
+exports[`Book API routes GET /books/:book_id/reviews/:review_id route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "bookId": "1",
+      "content": "nazhe el libro",
+      "score": "5",
+      "userId": "1",
+    },
+    "id": "1",
+    "type": "reviews",
+  },
+}
+`;
+
+exports[`Book API routes GET /books/:id when passed id corresponds to an existing book body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "author": "Testman",
+      "description": "testbook",
+      "genre": "Test",
+      "isbn": "9786124497099",
+      "title": "Test Book",
+      "userId": 1,
+    },
+    "id": "2",
+    "type": "books",
+  },
+}
+`;
+
+exports[`Book API routes PATCH /books/:book_id/reviews/:review_id when patched correctly body matches snapshot 1`] = `Object {}`;
+
+exports[`Book API routes PATCH /books/:id when patched correctly body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "author": "Testman4",
+      "description": "t4stbook3",
+      "genre": "Test4",
+      "isbn": "97861244974993",
+      "title": "Test Book4",
+      "userId": 1,
+    },
+    "id": "1",
+    "type": "books",
+  },
+}
+`;
+
+exports[`Book API routes POST /books book data is valid response body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "author": "Testman2",
+      "description": "testbook2",
+      "genre": "Test2",
+      "isbn": "97861244970992",
+      "title": "Test Book2",
+      "userId": 1,
+    },
+    "id": "3",
+    "type": "books",
+  },
+}
+`;
+
+exports[`Book API routes POST /books/:book:id/reviews route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "bookId": "1",
+      "content": "nazhe el libro hermanitoooo",
+      "score": "4",
+      "userId": "1",
+    },
+    "id": "2",
+    "type": "reviews",
+  },
+}
+`;
