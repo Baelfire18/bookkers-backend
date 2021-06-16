@@ -78,7 +78,7 @@ router.use(apiSetCurrentUser);
 
 router.post('api.books.create', '/', async (ctx) => {
   const isBook = await ctx.orm.book.findOne({ where: { isbn: ctx.request.body.isbn } });
-  if (isBook) ctx.throw(401, 'ISBN code alreay exist!');
+  if (isBook) ctx.throw(400, 'ISBN code alreay exist!');
   try {
     const book = ctx.orm.book.build(ctx.request.body);
     book.userId = ctx.state.currentUser.id;
@@ -127,7 +127,7 @@ router.post('api.books.review.create', '/:id/reviews', loadBook, async (ctx) => 
     ctx.status = 201;
     ctx.body = ReviewSerializer.serialize(review);
   } catch (ValidationError) {
-    ctx.throw(404, 'FAILED');
+    ctx.throw(400, 'Bad Request');
   }
 });
 
@@ -147,7 +147,7 @@ router.patch('api.books.review.edit', '/:id/reviews/:id2', loadBook, async (ctx)
     ctx.status = 201;
     ctx.body = ReviewSerializer.serialize(review);
   } catch (ValidationError) {
-    ctx.throw(404, 'FAILED');
+    ctx.throw(400, 'Bad Request');
   }
 });
 
