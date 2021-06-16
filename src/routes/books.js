@@ -97,7 +97,7 @@ router.patch('api.books.patch', '/:id', loadBook, async (ctx) => {
   if (ctx.state.currentUser.id !== book.userId && !ctx.state.currentUser.admin) ctx.throw(401, 'AUTHENTIFICATION ERROR');
 
   const isIsbn = await ctx.orm.book.findOne({ where: { isbn: ctx.request.body.isbn } });
-  if (isIsbn && book.id !== isIsbn.id) ctx.throw(401, 'ISBN code alreay exist!');
+  if (isIsbn && book.id !== isIsbn.id) ctx.throw(400, 'ISBN code alreay exist!');
 
   try {
     const {
