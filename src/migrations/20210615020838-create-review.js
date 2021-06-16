@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
       },
       userId: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
           model: 'users',
@@ -20,7 +20,7 @@ module.exports = {
         },
       },
       bookId: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
           model: 'books',
@@ -28,7 +28,7 @@ module.exports = {
         },
       },
       score: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       createdAt: {
