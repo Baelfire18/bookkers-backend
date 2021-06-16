@@ -139,10 +139,10 @@ router.patch('api.books.review.edit', '/:id/reviews/:id2', loadBook, async (ctx)
     const review = await ctx.orm.review.findOne({ where: { id: ctx.params.id2, bookId: book.id } });
     if (review.userId !== ctx.state.currentUser.id) ctx.throw(401, 'AUTHENTIFICATION ERROR');
     const {
-      content, score, userId, bookId,
+      content, score,
     } = ctx.request.body;
     await review.update({
-      content, userId, bookId, score,
+      content, score,
     });
     ctx.status = 201;
     ctx.body = ReviewSerializer.serialize(review);

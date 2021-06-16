@@ -36,10 +36,10 @@ Object {
   "data": Array [
     Object {
       "attributes": Object {
-        "bookId": "1",
+        "bookId": 1,
         "content": "nazhe el libro",
-        "score": "5",
-        "userId": "1",
+        "score": 5,
+        "userId": 1,
       },
       "id": "1",
       "type": "reviews",
@@ -52,10 +52,10 @@ exports[`Book API routes GET /books/:book_id/reviews/:review_id route response i
 Object {
   "data": Object {
     "attributes": Object {
-      "bookId": "1",
+      "bookId": 1,
       "content": "nazhe el libro",
-      "score": "5",
-      "userId": "1",
+      "score": 5,
+      "userId": 1,
     },
     "id": "1",
     "type": "reviews",
@@ -120,10 +120,10 @@ exports[`Book API routes POST /books/:book:id/reviews route response is valid re
 Object {
   "data": Object {
     "attributes": Object {
-      "bookId": "1",
+      "bookId": 1,
       "content": "nazhe el libro hermanitoooo",
-      "score": "4",
-      "userId": "1",
+      "score": 4,
+      "userId": 1,
     },
     "id": "2",
     "type": "reviews",

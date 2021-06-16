@@ -21,7 +21,7 @@ module.exports = {
         allowNull: false,
       },
       userId: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
           model: 'users',
