@@ -47,6 +47,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "core-js": "^3.6.5",
+    "date-fns": "^2.22.1",
     "dotenv": "^10.0.0",
     "jsonapi-serializer": "^3.6.7",
     "jsonwebtoken": "^8.5.1",
