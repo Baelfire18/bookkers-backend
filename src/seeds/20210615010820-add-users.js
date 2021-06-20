@@ -12,6 +12,7 @@ module.exports = {
       email: 'jacastro18@uc.cl',
       password: '123456',
       admin: 1,
+      imageUrl: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -22,6 +23,7 @@ module.exports = {
       email: 'jm.madriaza@uc.cl',
       password: '123456',
       admin: 0,
+      imageUrl: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -32,6 +34,7 @@ module.exports = {
       email: 'bhilcker@uc.cl',
       password: '123456',
       admin: 0,
+      imageUrl: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -42,6 +45,7 @@ module.exports = {
       email: 'hjortuzar@uc.cl',
       password: '123456',
       admin: 1,
+      imageUrl: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     });

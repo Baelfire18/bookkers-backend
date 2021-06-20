@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.26.0",
     "core-js": "^3.6.5",
     "date-fns": "^2.22.1",
     "dotenv": "^10.0.0",

@@ -9,7 +9,7 @@ const { apiSetCurrentUser } = require('../middlewares/auth');
 // JSONSERIALIZER
 
 const UserSerializer = new JSONAPISerializer('users', {
-  attributes: ['firstName', 'lastName', 'email'],
+  attributes: ['firstName', 'lastName', 'email', 'imageUrl'],
   keyForAttribute: 'camelCase',
 });
 
@@ -58,17 +58,20 @@ router.get('api.users', '/:id', async (ctx) => {
 
 router.patch('api.users.patch', '/:id', loadUser, async (ctx) => {
   const { user } = ctx.state;
+  const { cloudinary } = ctx.state;
   if (ctx.state.currentUser.id !== user.id) ctx.throw(401, 'NOT AUTHORIZED');
   try {
-    const {
-      firstName, lastName, email, password,
-    } = ctx.request.body;
-    await user.update({
-      firstName, lastName, email, password,
-    });
+    const { image } = ctx.request.files;
+    if (image.size > 0) {
+      const imageUrl = await cloudinary.uploader.upload(image.path);
+      ctx.request.body.imageUrl = imageUrl.url;
+    }
+    console.log(ctx.request.body.imageUrl);
+    await user.update(ctx.request.body, { fields: ['firstName', 'lastName', 'email', 'password', 'imageUrl'] });
     ctx.status = 201;
     ctx.body = UserSerializer.serialize(user);
-  } catch (ValidationError) {
+  } catch (Error) {
+    console.log(Error);
     ctx.throw(400, 'Bad Request');
   }
 });
