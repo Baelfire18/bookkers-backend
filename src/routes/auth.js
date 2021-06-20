@@ -24,7 +24,7 @@ router.post('api.auth.login', '/', async (ctx) => {
   if (!user) ctx.throw(404, `No user found with ${email}`);
   const authenticated = await user.checkPassword(password);
   if (!authenticated) ctx.throw(401, 'Invalid password');
-  let date = datefns.formatDistance(new Date(), new Date(), { addSuffix: true });
+  let date = datefns.formatRelative(new Date(), new Date(), { addSuffix: true });
   date = date.toLocaleString('en-US', { timeZone: 'America/Santiago' });
   // console.log(date);
   if (AUTH_MAILING_ACTIVE) await sendExampleEmail(ctx, ctx.request.body, user, date);
