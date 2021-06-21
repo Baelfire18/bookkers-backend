@@ -20,10 +20,16 @@ const { loadUser } = require('../middlewares/users');
 // CREATE A NEW USER
 
 router.post('api.users.create', '/', async (ctx) => {
+  const { cloudinary } = ctx.state;
   try {
     const user = ctx.orm.user.build(ctx.request.body);
     user.admin = 0;
-    await user.save({ fields: ['firstName', 'lastName', 'email', 'password', 'admin'] });
+    const { image } = ctx.request.files;
+    if (image && image.size > 0) {
+      const imageUrl = await cloudinary.uploader.upload(image.path);
+      user.imageUrl = imageUrl.url;
+    }
+    await user.save({ fields: ['firstName', 'lastName', 'email', 'password', 'admin', 'imageUrl'] });
     ctx.status = 201;
     ctx.body = UserSerializer.serialize(user);
   } catch (ValidationError) {
@@ -62,16 +68,14 @@ router.patch('api.users.patch', '/:id', loadUser, async (ctx) => {
   if (ctx.state.currentUser.id !== user.id) ctx.throw(401, 'NOT AUTHORIZED');
   try {
     const { image } = ctx.request.files;
-    if (image.size > 0) {
+    if (image && image.size > 0) {
       const imageUrl = await cloudinary.uploader.upload(image.path);
       ctx.request.body.imageUrl = imageUrl.url;
     }
-    console.log(ctx.request.body.imageUrl);
     await user.update(ctx.request.body, { fields: ['firstName', 'lastName', 'email', 'password', 'imageUrl'] });
     ctx.status = 201;
     ctx.body = UserSerializer.serialize(user);
   } catch (Error) {
-    console.log(Error);
     ctx.throw(400, 'Bad Request');
   }
 });
