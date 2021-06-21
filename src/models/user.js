@@ -64,6 +64,9 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    imageUrl: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'user',

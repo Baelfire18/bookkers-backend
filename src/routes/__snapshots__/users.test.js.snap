@@ -6,6 +6,7 @@ Object {
     "attributes": Object {
       "email": "afro@uc.cl",
       "firstName": "John",
+      "imageUrl": null,
       "lastName": "Doe",
     },
     "id": "2",
@@ -20,6 +21,7 @@ Object {
     "attributes": Object {
       "email": "test@gmail.com",
       "firstName": "Test",
+      "imageUrl": null,
       "lastName": "User",
     },
     "id": "1",
@@ -34,6 +36,7 @@ Object {
     "attributes": Object {
       "email": "afro7e@uc.cl",
       "firstName": "John",
+      "imageUrl": null,
       "lastName": "Doe",
     },
     "id": "1",
@@ -48,6 +51,7 @@ Object {
     "attributes": Object {
       "email": "cacunazhe@uc.cl",
       "firstName": "John",
+      "imageUrl": null,
       "lastName": "Doe",
     },
     "id": "3",
