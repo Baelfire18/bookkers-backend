@@ -45,12 +45,11 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    
 
     return Report.bulkCreate(reportsArray);
   },
-  
-    // down: async (queryInterface, Sequelize) => {
+
+  // down: async (queryInterface, Sequelize) => {
   down: async () => {
     /**
      * Add commands to revert seed here.

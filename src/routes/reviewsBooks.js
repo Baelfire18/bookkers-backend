@@ -94,7 +94,6 @@ router.delete('api.books.review.delete', '/:reviewId', loadReview, async (ctx) =
   }
 });
 
-
 // ERROR SI YA LE DISTE LIKE FALTA
 router.post('api.books.review.like.create', '/:reviewId/likes', loadReview, async (ctx) => {
   try {
@@ -117,6 +116,5 @@ router.delete('api.books.review.like.delete', '/:reviewId/likes', loadReview, as
     ctx.throw(400, 'Bad Request');
   }
 });
-
 
 module.exports = router;
