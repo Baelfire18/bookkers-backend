@@ -14,6 +14,11 @@ const ReviewSerializer = new JSONAPISerializer('reviews', {
   keyForAttribute: 'camelCase',
 });
 
+const ReportSerializer = new JSONAPISerializer('reports', {
+  attributes: ['content', 'userId', 'reviewId'],
+  keyForAttribute: 'camelCase',
+});
+
 const router = new KoaRouter();
 
 const { loadBook } = require('../middlewares/books');
@@ -115,6 +120,31 @@ router.delete('api.books.review.like.delete', '/:reviewId/likes', loadReview, as
   } catch (ValidationError) {
     ctx.throw(400, 'Bad Request');
   }
+});
+
+router.post('api.books.review.report.create', '/:reviewId/reports', loadReview, async (ctx) => {
+  try {
+    const { review } = ctx.state;
+    const report = ctx.orm.report.build(ctx.request.body);
+    report.userId = ctx.state.currentUser.id;
+    report.reviewId = review.id;
+    await report.save({ fields: ['content', 'userId', 'reviewId'] });
+    ctx.status = 201;
+    ctx.body = ReportSerializer.serialize(report);
+  } catch (ValidationError) {
+    ctx.throw(400, 'Bad Request');
+  }
+});
+
+router.get('api.books.review.reports', '/:reviewId/reports', loadReview, async (ctx) => {
+  const { review } = ctx.state;
+  if (!ctx.state.currentUser.admin) ctx.throw(403, 'YOU REQUIERE ADMIN PRIVILEGES');
+  const reports = await review.getReports();
+  const json = ReportSerializer.serialize(reports);
+  if (json.data.length === 0) {
+    ctx.throw(404, "The book you are looking for doesn't have any reviews");
+  }
+  ctx.body = json;
 });
 
 module.exports = router;
