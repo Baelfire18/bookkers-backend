@@ -67,6 +67,8 @@ router.get('api.users', '/:userId', loadUser, async (ctx) => {
   ctx.body = UserSerializer.serialize(user);
 });
 
+// GET REVIEWS FROM USER (NEW) (TEST REQUIRE)
+
 router.get('api.users.reviews', '/:userId/reviews', loadUser, async (ctx) => {
   const { user } = ctx.state;
   const reviews = await user.getReviews();
@@ -76,6 +78,8 @@ router.get('api.users.reviews', '/:userId/reviews', loadUser, async (ctx) => {
   }
   ctx.body = json;
 });
+
+// GET LIKED REVIEWS FROM USER (TEST REQUIRE)
 
 router.get('api.users.reviews.liked', '/:userId/liked_reviews', loadUser, async (ctx) => {
   const { user } = ctx.state;
