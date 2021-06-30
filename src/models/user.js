@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.book);
       this.hasMany(models.review);
+      this.hasMany(models.report);
+      this.belongsToMany(models.review, { as: 'liked', through: 'liked_reviews' });
     }
   }
   user.init({
@@ -63,6 +65,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true,
       },
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
     },
   }, {
     sequelize,

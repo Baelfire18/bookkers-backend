@@ -28,6 +28,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        // DEFAULT IMAGE
+        defaultValue: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1624203818/1755103_ebhg9f.png',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

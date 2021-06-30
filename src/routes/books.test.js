@@ -3,6 +3,12 @@ const app = require('../app');
 
 const request = supertest(app.callback());
 
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn().mockReturnValue({
+    sendMail: jest.fn().mockReturnValue(),
+  }),
+}));
+
 describe('Book API routes', () => {
   let auth;
   const userFields = {
