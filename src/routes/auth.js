@@ -4,7 +4,6 @@ const jwtgenerator = require('jsonwebtoken');
 const datefns = require('date-fns');
 const sendExampleEmail = require('../mailers/example');
 
-
 const AUTH_MAILING_ACTIVE = true;
 
 const router = new KoaRouter();
