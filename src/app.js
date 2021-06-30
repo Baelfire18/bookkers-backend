@@ -85,13 +85,12 @@ render(app, {
 mailer(app);
 
 app.use((ctx, next) => {
-  if (process.env.CLOUDINARY_URL_MODIFY) {
+  if (process.env.CLOUDINARY_URL) {
     ctx.state.cloudinary = cloudinary;
-    const wea = process.env.CLOUDINARY_URL_MODIFY.split(':');
     cloudinary.config({ // Use individual variables
-      api_key: wea[0],
-      api_secret: wea[1],
-      cloud_name: wea[2],
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'cloud_name',
+      api_key: process.env.CLOUDINARY_API_KEY || 'api_key',
+      api_secret: process.env.CLOUDINARY_API_SECRET || 'api_secret',
     });
   }
   return next();
