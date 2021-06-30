@@ -74,7 +74,7 @@ router.post('api.books.review.create', '/', loadBook, async (ctx) => {
 router.patch('api.books.review.edit', '/:reviewId', loadReview, async (ctx) => {
   try {
     const { review } = ctx.state;
-    if (review.userId !== ctx.state.currentUser.id) ctx.throw(401, 'AUTHENTIFICATION ERROR');
+    if (review.userId !== ctx.state.currentUser.id) ctx.throw(403, 'METHOD NOT ALLOWED');
     const {
       content, score,
     } = ctx.request.body;
@@ -88,10 +88,12 @@ router.patch('api.books.review.edit', '/:reviewId', loadReview, async (ctx) => {
   }
 });
 
+// DELETE REVIEW OF A BOOK
+
 router.delete('api.books.review.delete', '/:reviewId', loadReview, async (ctx) => {
   try {
     const { review } = ctx.state;
-    if (review.userId !== ctx.state.currentUser.id && !ctx.state.currentUser.admin) ctx.throw(401, 'AUTHENTIFICATION ERROR');
+    if (review.userId !== ctx.state.currentUser.id && !ctx.state.currentUser.admin) ctx.throw(403, 'METHOD NOT ALLOWED');
     await review.destroy();
     ctx.status = 200;
   } catch (ValidationError) {
@@ -99,18 +101,19 @@ router.delete('api.books.review.delete', '/:reviewId', loadReview, async (ctx) =
   }
 });
 
-// ERROR SI YA LE DISTE LIKE FALTA
+// LIKE A REVIEW OF A BOOK
+
 router.post('api.books.review.like.create', '/:reviewId/likes', loadReview, async (ctx) => {
   try {
     const { review } = ctx.state;
-    // const like = await ctx.state.currentUser.getLiked();
-    // console.log(like);
     await review.addUser(ctx.state.currentUser);
     ctx.status = 200;
   } catch (ValidationError) {
     ctx.throw(400, 'Bad Request');
   }
 });
+
+// DELETE LIKE FROM REVIEW OF A BOOK
 
 router.delete('api.books.review.like.delete', '/:reviewId/likes', loadReview, async (ctx) => {
   try {
@@ -122,7 +125,9 @@ router.delete('api.books.review.like.delete', '/:reviewId/likes', loadReview, as
   }
 });
 
-router.post('api.books.review.report.create', '/:reviewId/reports', loadReview, async (ctx) => {
+// CREATE REPORT
+
+router.post('api.books.review.report.create', '/:reviewId/reports', loadReview, loadBook, async (ctx) => {
   try {
     const { review } = ctx.state;
     const report = ctx.orm.report.build(ctx.request.body);
@@ -136,13 +141,15 @@ router.post('api.books.review.report.create', '/:reviewId/reports', loadReview, 
   }
 });
 
+// GET REPORTS
+
 router.get('api.books.review.reports', '/:reviewId/reports', loadReview, async (ctx) => {
   const { review } = ctx.state;
   if (!ctx.state.currentUser.admin) ctx.throw(403, 'YOU REQUIERE ADMIN PRIVILEGES');
   const reports = await review.getReports();
   const json = ReportSerializer.serialize(reports);
   if (json.data.length === 0) {
-    ctx.throw(404, "The book you are looking for doesn't have any reviews");
+    ctx.throw(404, "The review you are looking for doesn't have any reports");
   }
   ctx.body = json;
 });

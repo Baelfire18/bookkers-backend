@@ -74,7 +74,7 @@ router.get('api.users.reviews', '/:userId/reviews', loadUser, async (ctx) => {
   const reviews = await user.getReviews();
   const json = ReviewSerializer.serialize(reviews);
   if (json.data.length === 0) {
-    ctx.throw(404, "The book you are looking for doesn't have any reviews");
+    ctx.throw(404, "This user doesn't have any reviews!");
   }
   ctx.body = json;
 });
