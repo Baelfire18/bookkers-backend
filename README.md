@@ -6,7 +6,11 @@
 ## Bookkers API Documentation
 
 Documentación basada en la [API de Twitter](https://documenter.getpostman.com/view/9956214/T1LMiT5U). 
+
 Se puede encontrar [acá (Bookkers API)](https://documenter.getpostman.com/view/13524334/TzeWF7TR#70c4b41d-7485-4032-ae28-2318b9e0729e).
+
+
+Tanto el invocador como los campeones son usuarios de la API y sus contraseñas respectivas se pueden ver en las tablas.
 
 ## Campeones
 | Nombre | Email | Contraseña |
@@ -19,9 +23,6 @@ Se puede encontrar [acá (Bookkers API)](https://documenter.getpostman.com/view/
 | Nombre | Email | Contraseña |
 | --- | --- | --- |
 | Humberto Ortúzar | hjortuzar@uc.cl | 123456 |
-
-Tanto el invocador como losa campeones son usuarios de la API y sus contraseñas se pueden ver en las tablas.
-
 
 # Diseño Bookkers API
 
