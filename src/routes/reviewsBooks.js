@@ -107,7 +107,7 @@ router.post('api.books.review.like.create', '/:reviewId/likes', loadReview, asyn
   try {
     const { review } = ctx.state;
     await review.addUser(ctx.state.currentUser);
-    ctx.status = 200;
+    ctx.status = 201;
   } catch (ValidationError) {
     ctx.throw(400, 'Bad Request');
   }
@@ -125,7 +125,7 @@ router.delete('api.books.review.like.delete', '/:reviewId/likes', loadReview, as
   }
 });
 
-// CREATE REPORT
+// POST REPORT
 
 router.post('api.books.review.report.create', '/:reviewId/reports', loadReview, loadBook, async (ctx) => {
   try {

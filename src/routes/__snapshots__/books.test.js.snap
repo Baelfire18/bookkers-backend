@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Book API routes DELETE /admin/books/:book_id route response is valid response body matches snapshot 1`] = `Object {}`;
+
+exports[`Book API routes DELETE /books/:book_id/reviews/:review_id route response is valid response body matches snapshot 1`] = `Object {}`;
+
+exports[`Book API routes DELETE /books/:book_id/reviews/:review_id/likes route response is valid response body matches snapshot 1`] = `Object {}`;
+
 exports[`Book API routes GET /books route response is valid response body matches snapshot 1`] = `
 Object {
   "data": Array [
@@ -17,6 +23,18 @@ Object {
     },
     Object {
       "attributes": Object {
+        "author": "Testman4",
+        "description": "testbook4",
+        "genre": "Test4",
+        "isbn": "97861244990893",
+        "title": "Test Book4",
+        "userId": 1,
+      },
+      "id": "2",
+      "type": "books",
+    },
+    Object {
+      "attributes": Object {
         "author": "Testman",
         "description": "testbook",
         "genre": "Test",
@@ -24,7 +42,7 @@ Object {
         "title": "Test Book",
         "userId": 1,
       },
-      "id": "2",
+      "id": "3",
       "type": "books",
     },
   ],
@@ -63,6 +81,22 @@ Object {
 }
 `;
 
+exports[`Book API routes GET /books/:book_id/reviews/:review_id/reports route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attributes": Object {
+        "content": "report, no me gusto la review",
+        "reviewId": 2,
+        "userId": 1,
+      },
+      "id": "1",
+      "type": "reports",
+    },
+  ],
+}
+`;
+
 exports[`Book API routes GET /books/:id when passed id corresponds to an existing book body matches snapshot 1`] = `
 Object {
   "data": Object {
@@ -74,7 +108,7 @@ Object {
       "title": "Test Book",
       "userId": 1,
     },
-    "id": "2",
+    "id": "3",
     "type": "books",
   },
 }
@@ -123,7 +157,7 @@ Object {
       "title": "Test Book2",
       "userId": 1,
     },
-    "id": "3",
+    "id": "4",
     "type": "books",
   },
 }
@@ -138,8 +172,24 @@ Object {
       "score": 4,
       "userId": 1,
     },
-    "id": "2",
+    "id": "3",
     "type": "reviews",
+  },
+}
+`;
+
+exports[`Book API routes POST /books/:book_id/reviews/:review_id/likes route response is valid response body matches snapshot 1`] = `Object {}`;
+
+exports[`Book API routes POST /books/:book_id/reviews/:review_id/reports route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "content": "report, no me gusto la review",
+      "reviewId": 2,
+      "userId": 1,
+    },
+    "id": "1",
+    "type": "reports",
   },
 }
 `;

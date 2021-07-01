@@ -16,17 +16,59 @@ describe('User API routes', () => {
     lastName: 'User',
     email: 'test@gmail.com',
     password: 'testPassword',
+    admin: 1,
+  };
+  const userFields2 = {
+    firstName: 'Test2',
+    lastName: 'User2',
+    email: 'test2@gmail.com',
+    password: 'test2Password',
     admin: 0,
+  };
+  const bookFields = {
+    title: 'Test Book3',
+    isbn: '97861244970993',
+    author: 'Testman3',
+    genre: 'Test3',
+    userId: 1,
+    description: 'testbook3',
+  };
+  const bookFields2 = {
+    title: 'Test Book4',
+    isbn: '97861244990893',
+    author: 'Testman4',
+    genre: 'Test4',
+    userId: 1,
+    description: 'testbook4',
+  };
+  const reviewFields = {
+    content: 'nazhe el libro',
+    userId: 1,
+    bookId: 1,
+    score: 5,
+  };
+  const reviewFields2 = {
+    content: 'bkn el libro',
+    userId: 1,
+    bookId: 2,
+    score: 5,
   };
 
   beforeAll(async () => {
     await app.context.orm.sequelize.sync({ force: true });
-    await app.context.orm.user.create(userFields);
+    const userTest = await app.context.orm.user.create(userFields);
+    await app.context.orm.user.create(userFields2);
     const authResponse = await request
       .post('/auth')
       .set('Content-type', 'application/json')
       .send({ email: userFields.email, password: userFields.password });
     auth = authResponse.body;
+    await app.context.orm.book.create(bookFields);
+    await app.context.orm.book.create(bookFields2);
+    const review1 = await app.context.orm.review.create(reviewFields);
+    const review2 = await app.context.orm.review.create(reviewFields2);
+    await review1.addUser(userTest);
+    await review2.addUser(userTest);
   });
 
   afterAll(async () => {
@@ -222,6 +264,102 @@ describe('User API routes', () => {
       });
 
       test('body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('GET /users/:id/reviews', () => {
+    let response;
+    const authorizedGetReviews = (userid) => request
+      .get(`/users/${userid}/reviews`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedGetReviews(1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+
+    describe('user dont have reviews', () => {
+      beforeAll(async () => {
+        response = await authorizedGetReviews(2);
+      });
+
+      test('responds with 404', () => {
+        expect(response.status).toBe(404);
+      });
+    });
+  });
+
+  describe('GET /users/:id/liked_reviews', () => {
+    let response;
+    const authorizedGetLikes = (userid) => request
+      .get(`/users/${userid}/liked_reviews`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedGetLikes(1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+
+    describe('user dont have likes', () => {
+      beforeAll(async () => {
+        response = await authorizedGetLikes(2);
+      });
+
+      test('responds with 404', () => {
+        expect(response.status).toBe(404);
+      });
+    });
+  });
+
+  describe('DELETE /admin/users/:user_id', () => {
+    let response;
+
+    const authorizedDeleteBook = (userid) => request
+      .delete(`/admin/users/${userid}`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedDeleteBook(2);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('text/plain');
+      });
+
+      test('response body matches snapshot', () => {
         expect(response.body).toMatchSnapshot();
       });
     });

@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`User API routes DELETE /admin/users/:user_id route response is valid response body matches snapshot 1`] = `Object {}`;
+
 exports[`User API routes GET /users/:id when passed id corresponds to an existing user body matches snapshot 1`] = `
 Object {
   "data": Object {
@@ -9,9 +11,63 @@ Object {
       "imageUrl": null,
       "lastName": "Doe",
     },
-    "id": "2",
+    "id": "3",
     "type": "users",
   },
+}
+`;
+
+exports[`User API routes GET /users/:id/liked_reviews route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attributes": Object {
+        "bookId": 1,
+        "content": "nazhe el libro",
+        "score": 5,
+        "userId": 1,
+      },
+      "id": "1",
+      "type": "reviews",
+    },
+    Object {
+      "attributes": Object {
+        "bookId": 2,
+        "content": "bkn el libro",
+        "score": 5,
+        "userId": 1,
+      },
+      "id": "2",
+      "type": "reviews",
+    },
+  ],
+}
+`;
+
+exports[`User API routes GET /users/:id/reviews route response is valid response body matches snapshot 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attributes": Object {
+        "bookId": 1,
+        "content": "nazhe el libro",
+        "score": 5,
+        "userId": 1,
+      },
+      "id": "1",
+      "type": "reviews",
+    },
+    Object {
+      "attributes": Object {
+        "bookId": 2,
+        "content": "bkn el libro",
+        "score": 5,
+        "userId": 1,
+      },
+      "id": "2",
+      "type": "reviews",
+    },
+  ],
 }
 `;
 
@@ -54,7 +110,7 @@ Object {
       "imageUrl": null,
       "lastName": "Doe",
     },
-    "id": "3",
+    "id": "4",
     "type": "users",
   },
 }
