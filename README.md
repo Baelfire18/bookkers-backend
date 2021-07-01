@@ -5,21 +5,24 @@
 
 ## Bookkers API Documentation
 
-Documentación basada en la API de Twitter. 
-Se puede encontrar [acá](https://documenter.getpostman.com/view/13524334/TzeWF7TR#70c4b41d-7485-4032-ae28-2318b9e0729e).
+Documentación basada en la [API de Twitter](https://documenter.getpostman.com/view/9956214/T1LMiT5U). 
+
+Se puede encontrar [acá (Bookkers API)](https://documenter.getpostman.com/view/13524334/TzeWF7TR#70c4b41d-7485-4032-ae28-2318b9e0729e).
+
+
+Tanto el invocador como los campeones son usuarios de la API y sus contraseñas respectivas se pueden ver en las tablas.
 
 ## Campeones
-| Nombre | Email |
-| --- | --- |
-| José Antonio Castro | jacastro18@uc.cl |
-| José Madriaza | jm.madriaza@uc.cl |
-| Bastian Hilcker | bhilcker@uc.cl |
+| Nombre | Email | Contraseña |
+| --- | --- | --- |
+| José Antonio Castro | jacastro18@uc.cl | 123456 |
+| José Madriaza | jm.madriaza@uc.cl | 123456 |
+| Bastian Hilcker | bhilcker@uc.cl | 123456 |
 
 ## Invocador
-| Nombre | Email |
-| --- | --- |
-| Humberto Ortúzar | hjortuzar@uc.cl |
-
+| Nombre | Email | Contraseña |
+| --- | --- | --- |
+| Humberto Ortúzar | hjortuzar@uc.cl | 123456 |
 
 # Diseño Bookkers API
 
