@@ -86,7 +86,7 @@ router.get('api.users.reviews.liked', '/:userId/liked_reviews', loadUser, async 
   const reviews = await user.getLiked();
   const json = ReviewSerializer.serialize(reviews);
   if (json.data.length === 0) {
-    ctx.throw(404, "The book you are looking for doesn't have any reviews");
+    ctx.throw(404, "The user you are looking for doesn't have any liked reviews");
   }
   ctx.body = json;
 });

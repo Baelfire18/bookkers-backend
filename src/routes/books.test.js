@@ -12,10 +12,17 @@ jest.mock('nodemailer', () => ({
 describe('Book API routes', () => {
   let auth;
   const userFields = {
-    firstName: 'TestBook',
-    lastName: 'UserBook',
-    email: 'testbook@gmail.com',
-    password: 'testbookPassword',
+    firstName: 'Test',
+    lastName: 'User',
+    email: 'test@gmail.com',
+    password: 'testPassword',
+    admin: 1,
+  };
+  const userFields2 = {
+    firstName: 'Test2',
+    lastName: 'User2',
+    email: 'test2@gmail.com',
+    password: 'test2Password',
     admin: 0,
   };
   const bookFields = {
@@ -26,23 +33,42 @@ describe('Book API routes', () => {
     userId: 1,
     description: 'testbook3',
   };
+  const bookFields2 = {
+    title: 'Test Book4',
+    isbn: '97861244990893',
+    author: 'Testman4',
+    genre: 'Test4',
+    userId: 1,
+    description: 'testbook4',
+  };
   const reviewFields = {
     content: 'nazhe el libro',
     userId: 1,
     bookId: 1,
     score: 5,
   };
+  const reviewFields2 = {
+    content: 'bkn el libro',
+    userId: 1,
+    bookId: 2,
+    score: 5,
+  };
 
   beforeAll(async () => {
     await app.context.orm.sequelize.sync({ force: true });
-    await app.context.orm.user.create(userFields);
+    const userTest = await app.context.orm.user.create(userFields);
+    await app.context.orm.user.create(userFields2);
     const authResponse = await request
       .post('/auth')
       .set('Content-type', 'application/json')
       .send({ email: userFields.email, password: userFields.password });
     auth = authResponse.body;
     await app.context.orm.book.create(bookFields);
-    await app.context.orm.review.create(reviewFields);
+    await app.context.orm.book.create(bookFields2);
+    const review1 = await app.context.orm.review.create(reviewFields);
+    const review2 = await app.context.orm.review.create(reviewFields2);
+    await review1.addUser(userTest);
+    await review2.addUser(userTest);
   });
 
   afterAll(async () => {
@@ -335,6 +361,166 @@ describe('Book API routes', () => {
       });
 
       test('body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('POST /books/:book_id/reviews/:review_id/likes', () => {
+    let response;
+
+    const authorizedPostReviewLike = (bookid, reviewid) => request
+      .post(`/books/${bookid}/reviews/${reviewid}/likes`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedPostReviewLike(1, 1);
+      });
+
+      test('responds with 201', () => {
+        expect(response.status).toBe(201);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('text/plain');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('DELETE /books/:book_id/reviews/:review_id/likes', () => {
+    let response;
+
+    const authorizedDeleteReviewLike = (bookid, reviewid) => request
+      .delete(`/books/${bookid}/reviews/${reviewid}/likes`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedDeleteReviewLike(1, 1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('text/plain');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('DELETE /books/:book_id/reviews/:review_id', () => {
+    let response;
+
+    const authorizedDeleteReview = (bookid, reviewid) => request
+      .delete(`/books/${bookid}/reviews/${reviewid}`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedDeleteReview(1, 1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('text/plain');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('POST /books/:book_id/reviews/:review_id/reports', () => {
+    let response;
+    const reportFieldsPost = {
+      content: 'report, no me gusto la review',
+    };
+
+    const authorizedReportReview = (body, bookid, reviewid) => request
+      .post(`/books/${bookid}/reviews/${reviewid}/reports`)
+      .auth(auth.access_token, { type: 'bearer' })
+      .send(body);
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedReportReview(reportFieldsPost, 2, 2);
+      });
+
+      test('responds with 201', () => {
+        expect(response.status).toBe(201);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('GET /books/:book_id/reviews/:review_id/reports', () => {
+    let response;
+
+    const authorizedGetReportsReview = (bookid, reviewid) => request
+      .get(`/books/${bookid}/reviews/${reviewid}/reports`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedGetReportsReview(2, 2);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('application/json');
+      });
+
+      test('response body matches snapshot', () => {
+        expect(response.body).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('DELETE /admin/books/:book_id', () => {
+    let response;
+
+    const authorizedDeleteBook = (bookid) => request
+      .delete(`/admin/books/${bookid}`)
+      .auth(auth.access_token, { type: 'bearer' });
+
+    describe('route response is valid', () => {
+      beforeAll(async () => {
+        response = await authorizedDeleteBook(1);
+      });
+
+      test('responds with 200', () => {
+        expect(response.status).toBe(200);
+      });
+
+      test('responds with a JSON body type', () => {
+        expect(response.type).toEqual('text/plain');
+      });
+
+      test('response body matches snapshot', () => {
         expect(response.body).toMatchSnapshot();
       });
     });
