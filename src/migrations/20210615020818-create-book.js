@@ -37,6 +37,12 @@ module.exports = {
         type: Sequelize.STRING(1024),
         allowNull: false,
       },
+      imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        // DEFAULT IMAGE
+        defaultValue: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1625949914/book_jdcwha.jpg',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

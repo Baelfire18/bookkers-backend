@@ -12,7 +12,7 @@ module.exports = {
 
     likedReviewsArray.push({
       userId: '1',
-      reviewId: '2',
+      reviewId: '8',
       createdAt: new Date(),
       updatedAt: new Date(),
     });

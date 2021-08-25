@@ -13,6 +13,7 @@ module.exports = {
       genre: 'Fantasy',
       userId: 1,
       description: 'Twelve-year-old Percy Jackson is on the most dangerous quest of his life. With the help of a satyr and a daughter of Athena, Percy must journey across the United States to catch a thief who has stolen the original weapon of mass destruction — Zeus’ master bolt. Along the way, he must face a host of mythological enemies determined to stop him. Most of all, he must come to terms with a father he has never known, and an Oracle that has warned him of betrayal by a friend.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1625950892/91RQ5d-eIqL_lknrc2.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -24,6 +25,7 @@ module.exports = {
       genre: 'Fantasy',
       userId: 1,
       description: 'When Thalia’s tree is mysteriously poisoned, the magical borders of Camp Half-Blood begin to fail. Now Percy and his friends have just days to find the only magic item powerful to save the camp before it is overrun by monsters. The catch: they must sail into the Sea of Monsters to find it. Along the way, Percy must stage a daring rescue operation to save his old friend Grover, and he learns a terrible secret about his own family, which makes him question whether being the son of Poseidon is an honor or a curse.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1625950907/516mxcRtcgL_sn7j9y.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -35,6 +37,7 @@ module.exports = {
       genre: 'Fantasy',
       userId: 1,
       description: 'When Percy Jackson gets an urgent distress call from his friend Grover, he immediately prepares for battle. He knows he will need his powerful demigod allies at his side, his trusty bronze sword Riptide, and… a ride from his mom.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1625950931/81vB-ian3NL_a7vukz.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -46,6 +49,7 @@ module.exports = {
       genre: 'Fantasy',
       userId: 1,
       description: 'Percy Jackson isn’t expecting freshman orientation to be any fun, but when a mysterious mortal acquaintance appears, pursued by demon cheerleaders, things quickly go from bad to worse.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1625950942/latest_w9g4yb.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -57,6 +61,7 @@ module.exports = {
       genre: 'Fantasy',
       userId: 1,
       description: 'All year the half-bloods have been preparing for battle against the Titans, knowing the odds of victory are grim. Kronos’s army is stronger than ever, and with every god and half-blood he recruits, the evil Titan’s power only grows.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1625951121/918s2eM4pSL_d6ictv.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -68,6 +73,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'The Silence of the Lambs gets all the attention, but the best Hannibal Lecter novel is still the first; a book that suggests the most horrifying of evils can grow from an all too human place, and that even heroes can carry something monstrous inside them. Every Lecter story on some level features an implicit Faustian bargain and none is more tragic than FBI crimimal profiler Will Graham’s knowing choice to sacrifice his own fragile peace of mind to stop a killer he understands all too well.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048293/Drag01big_xkudbt.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -79,6 +85,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'There are no real villains in Oscar Wilde’s first and only novel. The lurking danger of this book is our capacity for vanity and how it can literally and metaphorically disfigure us, how obsession with retaining beauty will inevitably lead to its destruction. Even Wilde’s central monster, Dorian himself, is more tragic idiot than conniving mastermind, a youthful dope consumed by a pathological belief that the only thing worth having is beauty at any cost. His descent would almost be funny if it wasn’t so chillingly believable.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048363/9781435129757_afwon0.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -90,6 +97,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'Sometimes horror, even at its darkest, is the window dressing for something more tender. That’s the case with the unique and entirely enrapturing Horns, a book that starts out as a twisted revenge story before slowly becoming something more sprawling, knotty, and ultimately hopeful. Horns is by turns a gothic romance, a murder mystery, a supernatural thriller and a biting satire on how quick we can be to judge despite the darkness we all harbour.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048395/6172bsvjJNL_tpjglv.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -101,6 +109,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'Often the best horror stories are the ones that believe, through all the death, jump-scares and creepiness, in the fundamental triumph of goodness. That The Exorcist was long considered one of the most terrifying novels ever is in large part is down to how deeply we are led to care about the desperate plight of its central characters, and how carefully detailed every one of them is. The evil they face is huge and incomprehensible, but not, in the end, insurmountable, and much of the book’s (and film’s) power comes from the ultimate hard-won victory of a small group who sacrifice everything for an innocent child.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048466/61Nrewf2j8L_rkwdd1.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -112,6 +121,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'To be clear, like Jaws, the film is better; Hitchcock having made a series of clever tweaks to find new ways of manipulating the audience by making them care. But everything that turned Psycho into an enduring cultural lightning rod originated in Bloch’s novel; the shower scene, the house on the hill, the twist ending and the sense of gothic dread dripping from every moment. The gleeful subversion of conventions that Hitchcock gets all the credit for originated here, and without this book, horror – and cinema – wouldn’t be the same.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048504/81nZt_t7dBL_byyuit.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -123,6 +133,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'Justin Cronin’s epic vampire saga is a sprawling tale of love, loss and societies destroyed, rebuilt and destroyed again, centred not only on characters we could care deeply for, but a slowly growing sense of insidious evil whispering from the shadows, a terror so unknowable that it was always going to lose a little menace once it was explained. But like the best horror writers, Cronin uses that inevitability to make his point – that all too often evil grows from a place that is a little more understandable than we might care to confront. The whole trilogy is fantastic, but for its singular atmosphere of growing dread the first will always be the best.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048537/91oJYDjS7YL_czbwk2.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -134,6 +145,7 @@ module.exports = {
       genre: 'Horror',
       userId: 3,
       description: 'There’s an intoxicating combination of anger, sadness and catharsis at the heart of Misery; a book written by an author trying to move away from horror only to find that his vast readership wouldn’t accept that. Cue the story of a writer literally held hostage by a fan torturing him into writing what she wants, facilitating the writer’s slow realisation that the genre he was so desperate to move on from may be the only one that’s right for him. It’s an intensely personal and ambivalent book, and one of the best explorations of the highs and lows of creativity ever written.',
+      imageUrl: 'https://res.cloudinary.com/dhlmiijdd/image/upload/v1626048573/9781501143106_p0_v2_s1200x630_bvyhz0.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });

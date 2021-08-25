@@ -298,8 +298,8 @@ describe('User API routes', () => {
         response = await authorizedGetReviews(2);
       });
 
-      test('responds with 404', () => {
-        expect(response.status).toBe(404);
+      test('responds with 204', () => {
+        expect(response.status).toBe(204);
       });
     });
   });
