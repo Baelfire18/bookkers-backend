@@ -18,6 +18,11 @@ const ReviewSerializer = new JSONAPISerializer('reviews', {
   keyForAttribute: 'camelCase',
 });
 
+const BookSerializer = new JSONAPISerializer('books', {
+  attributes: ['title', 'isbn', 'author', 'genre', 'userId', 'description', 'imageUrl'],
+  keyForAttribute: 'camelCase',
+});
+
 const router = new KoaRouter();
 
 const { loadUser } = require('../middlewares/users');
@@ -57,6 +62,16 @@ router.get('api.users', '/me', async (ctx) => {
   ctx.body = UserSerializer.serialize(user);
 });
 
+router.get('api.users.books', '/my_books', async (ctx) => {
+  const user = ctx.state.currentUser;
+  const books = await user.getBooks();
+  const json = BookSerializer.serialize(books);
+  if (json.data.length === 0) {
+    ctx.throw(204, "This user doesn't have any books!");
+  }
+  ctx.body = json;
+});
+
 // GET SPECIFIC USER
 
 router.get('api.users', '/:userId', loadUser, async (ctx) => {
@@ -74,9 +89,19 @@ router.get('api.users.reviews', '/:userId/reviews', loadUser, async (ctx) => {
   const reviews = await user.getReviews();
   const json = ReviewSerializer.serialize(reviews);
   if (json.data.length === 0) {
-    ctx.throw(404, "This user doesn't have any reviews!");
+    ctx.throw(204, "This user doesn't have any reviews!");
   }
   ctx.body = json;
+});
+
+router.get('api.users.index', '/', async (ctx) => {
+  const users = await ctx.orm.user.findAll({
+    order: [
+      ['id', 'ASC'],
+    ],
+  });
+  ctx.body = UserSerializer.serialize(users);
+  ctx.status = 200;
 });
 
 // GET LIKED REVIEWS FROM USER (TEST REQUIRE)
@@ -94,8 +119,7 @@ router.get('api.users.reviews.liked', '/:userId/liked_reviews', loadUser, async 
 // EDIT AN EXISTENT USER
 
 router.patch('api.users.patch', '/:userId', loadUser, async (ctx) => {
-  const { user } = ctx.state;
-  const { cloudinary } = ctx.state;
+  const { user, cloudinary } = ctx.state;
   if (ctx.state.currentUser.id !== user.id) ctx.throw(401, 'NOT AUTHORIZED');
   try {
     if (ctx.request.files) {

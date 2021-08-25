@@ -21,6 +21,7 @@ const ReportSerializer = new JSONAPISerializer('reports', {
 
 const router = new KoaRouter();
 
+const { loadUser } = require('../middlewares/users');
 const { loadBook } = require('../middlewares/books');
 const { loadReview } = require('../middlewares/reviews');
 
@@ -28,10 +29,14 @@ const { loadReview } = require('../middlewares/reviews');
 
 router.get('api.books.review', '/', loadBook, async (ctx) => {
   const { book } = ctx.state;
-  const reviews = await book.getReviews();
+  const reviews = await book.getReviews({
+    order: [
+      ['id', 'ASC'],
+    ],
+  });
   const json = ReviewSerializer.serialize(reviews);
   if (json.data.length === 0) {
-    ctx.throw(404, "The book you are looking for doesn't have any reviews");
+    ctx.throw(204, "The book you are looking for doesn't have any reviews");
   }
   ctx.body = json;
 });
@@ -84,7 +89,7 @@ router.patch('api.books.review.edit', '/:reviewId', loadReview, async (ctx) => {
     ctx.status = 201;
     ctx.body = ReviewSerializer.serialize(review);
   } catch (ValidationError) {
-    ctx.throw(400, 'Bad Request');
+    ctx.throw(400, 'Bad request');
   }
 });
 
@@ -152,6 +157,19 @@ router.get('api.books.review.reports', '/:reviewId/reports', loadReview, async (
     ctx.throw(404, "The review you are looking for doesn't have any reports");
   }
   ctx.body = json;
+});
+
+// LIKE A REVIEW OF A BOOK
+
+router.get('api.books.review.like.get', '/:reviewId/:userId', loadReview, loadUser, async (ctx) => {
+  try {
+    const { review, user } = ctx.state;
+    const trolazo = await user.getLiked({ where: { id: review.id } });
+    const json = ReviewSerializer.serialize(trolazo);
+    ctx.body = json;
+  } catch (ValidationError) {
+    ctx.throw(400, `Bad Request \n${ValidationError}`);
+  }
 });
 
 module.exports = router;

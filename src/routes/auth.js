@@ -13,6 +13,7 @@ function generateToken(user) {
     jwtgenerator.sign(
       { sub: user.id },
       process.env.JWT_SECRET,
+      { expiresIn: 60 * 60 * 8 },
       (err, tokenResult) => (err ? reject(err) : resolve(tokenResult)),
     );
   });
@@ -24,6 +25,7 @@ router.post('api.auth.login', '/', async (ctx) => {
   if (!user) ctx.throw(404, `No user found with ${email}`);
   const authenticated = await user.checkPassword(password);
   if (!authenticated) ctx.throw(401, 'Invalid password');
+
   let date = datefns.formatRelative(new Date(), new Date(), { addSuffix: true });
   date = date.toLocaleString('en-US', { timeZone: 'America/Santiago' });
   // console.log(date);
@@ -32,7 +34,16 @@ router.post('api.auth.login', '/', async (ctx) => {
     const token = await generateToken(user);
     // follow OAuth RFC6749 response standart
     // https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
+    const toSendUser = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      admin: user.admin,
+      imageUrl: user.imageUrl,
+    };
     ctx.body = {
+      ...toSendUser,
       access_token: token,
       token_type: 'Bearer',
     };

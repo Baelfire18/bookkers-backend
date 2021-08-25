@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [12, 20],
+        len: [10, 14],
       },
     },
     author: {
@@ -59,6 +59,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true,
       },
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
     },
   }, {
     sequelize,

@@ -9,7 +9,7 @@ module.exports = {
     reportsArray.push({
       userId: 1,
       reviewId: 1,
-      content: 'Esto no es vegano, report',
+      content: 'I dont like what he is saying here',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -17,7 +17,7 @@ module.exports = {
     reportsArray.push({
       userId: 1,
       reviewId: 5,
-      content: 'En mi opinion esto es inadecuado',
+      content: 'In mi opinion this is inappropiate',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -25,7 +25,7 @@ module.exports = {
     reportsArray.push({
       userId: 2,
       reviewId: 2,
-      content: 'No creo que el score sea justo',
+      content: 'I dont think that the score is fair',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -33,7 +33,7 @@ module.exports = {
     reportsArray.push({
       userId: 3,
       reviewId: 3,
-      content: 'El libro no es tan bueno como dice',
+      content: 'The book isnt as good as he says',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -41,7 +41,7 @@ module.exports = {
     reportsArray.push({
       userId: 4,
       reviewId: 4,
-      content: 'Me parece ofensivo',
+      content: 'It seems offensive to me',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
